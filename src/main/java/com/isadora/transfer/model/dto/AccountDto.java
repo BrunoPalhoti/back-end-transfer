@@ -1,6 +1,10 @@
 package com.isadora.transfer.model.dto;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,7 +21,17 @@ public class AccountDto {
 	private String accountOring;
 	private String accountDestin;
 	private double velue;
-	private LocalDateTime dateScheduled;
-	private LocalDateTime dateTransfer;
+	
+	@JsonFormat(pattern = "dd/MM/yyyy")
+	LocalDate dateScheduled;
+	
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+	@JsonFormat(pattern = "dd/MM/yyyy")
+	private LocalDate dateTransfer;
+	private String period;
+	
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+	@JsonFormat(pattern = "dd/MM/yyyy")
+	private double rate;
 	
 }
