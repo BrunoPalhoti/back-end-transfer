@@ -36,12 +36,10 @@ public class AccountResoucer {
 						.stream().map(x -> mapper.map(x, AccountDto.class)).collect(Collectors.toList()));
 	}
 	
-	
 	@PostMapping
 	public ResponseEntity<AccountDto> create(@RequestBody AccountDto accountDto){
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 				.path(ID).buildAndExpand(accountService.create(accountDto).getId()).toUri();
 		return ResponseEntity.created(uri).build();
 	}
-
 }

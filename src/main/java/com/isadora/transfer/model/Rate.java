@@ -1,7 +1,5 @@
 package com.isadora.transfer.model;
 
-import java.time.LocalDate;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,15 +13,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Account {
-	
+public class Rate {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Integer id;
-	String accountOring;
-	String accountDestin;
-	double velue;
-	LocalDate dateScheduled = LocalDate.now();
-	LocalDate dateTransfer;
-
+	double rateValue;
 }

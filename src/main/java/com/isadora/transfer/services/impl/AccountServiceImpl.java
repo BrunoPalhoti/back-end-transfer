@@ -10,6 +10,7 @@ import com.isadora.transfer.services.AccountService;
 
 @Service
 public class AccountServiceImpl implements AccountService {
+	
 
 	@Override
 	public List<Account> findAll() {
@@ -23,4 +24,7 @@ public class AccountServiceImpl implements AccountService {
 		return null;
 	}
 
+	private void valueRate() {
+		
+	}
 }

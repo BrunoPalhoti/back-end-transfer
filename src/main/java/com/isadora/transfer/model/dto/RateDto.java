@@ -1,7 +1,5 @@
 package com.isadora.transfer.model.dto;
 
-import java.time.LocalDateTime;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,13 +9,9 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class AccountDto {
+public class RateDto {
 	
 	private Integer id;
-	private String accountOring;
-	private String accountDestin;
-	private double velue;
-	private LocalDateTime dateScheduled;
-	private LocalDateTime dateTransfer;
-	
+	private double rate;
+
 }
