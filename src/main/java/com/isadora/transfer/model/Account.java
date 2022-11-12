@@ -24,7 +24,7 @@ public class Account {
 	Integer id;
 	String accountOring;
 	String accountDestin;
-	double velue;
+	Double velue;
 	
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	LocalDate dateScheduled;
@@ -32,6 +32,6 @@ public class Account {
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	LocalDate dateTransfer;
 	String period;
-	double rate;
+	Double rate;
 
 }

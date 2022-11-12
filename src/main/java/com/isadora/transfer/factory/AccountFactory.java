@@ -2,8 +2,11 @@ package com.isadora.transfer.factory;
 
 import java.time.temporal.ChronoUnit;
 
+import org.springframework.stereotype.Component;
+
 import com.isadora.transfer.model.Account;
 
+@Component
 public class AccountFactory {
 	
 	
@@ -21,20 +24,29 @@ public class AccountFactory {
 	
 	public Double rateC(Account obj) {
 		Double differenceDays = (double) ChronoUnit.DAYS.between(obj.getDateTransfer(),obj.getDateScheduled());
+		Double rate = null;
+		
 		 if(differenceDays > 10 && differenceDays <= 20) {
 				obj.setRate(obj.getVelue() * 0.082);
+				rate = obj.getRate();
+				return rate;
 				
 			} else if(differenceDays > 20 && differenceDays <= 30) {
 				obj.setRate(obj.getVelue() * 0.069);
+				rate = obj.getRate();
+				return rate;
 				
 			} else if(differenceDays > 30 && differenceDays <= 40) {
 				obj.setRate(obj.getVelue() * 0.047);
+				rate = obj.getRate();
+				return rate;
 				
 			} else if( differenceDays > 40) {
 				obj.setRate(obj.getVelue() *  0.017);
+				rate = obj.getRate();
+				return rate;
 			}
-		Double rate = obj.getRate();
-		return rate;
+			return rate;
 	}
 	
 	public Double rateD(Account obj) {
