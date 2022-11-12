@@ -7,6 +7,5 @@ import com.isadora.transfer.model.dto.AccountDto;
 
 public interface AccountRepository extends JpaRepository<Account, Integer> {
 
-	double save(AccountDto obj);
 
 }

@@ -38,8 +38,9 @@ public class AccountResoucer {
 //	}
 //	
 	@PostMapping
-	public ResponseEntity<AccountDto> create(@RequestBody AccountDto accountDto){
+	public ResponseEntity<AccountDto> create(@RequestBody Account accountDto){
 		accountDto.setDateTransfer(LocalDate.now());
-		return new ResponseEntity<AccountDto>(accountService.create(accountDto), HttpStatus.CREATED);
+		accountService.create(accountDto);
+		return new ResponseEntity<AccountDto>(HttpStatus.CREATED);
 	}
 }

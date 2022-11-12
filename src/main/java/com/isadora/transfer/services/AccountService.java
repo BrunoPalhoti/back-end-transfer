@@ -6,5 +6,5 @@ import com.isadora.transfer.model.dto.AccountDto;
 
 public interface AccountService {
 	List<Account> findAll();
-	AccountDto create(AccountDto obj);
+	void create(Account obj);
 }

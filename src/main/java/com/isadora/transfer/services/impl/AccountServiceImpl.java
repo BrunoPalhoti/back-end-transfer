@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import java.time.temporal.ChronoUnit;
 
 import com.isadora.transfer.enums.TypeAccountEnum;
+import com.isadora.transfer.factory.AccountFactory;
 import com.isadora.transfer.model.Account;
 import com.isadora.transfer.model.dto.AccountDto;
 import com.isadora.transfer.repository.AccountRepository;
@@ -17,6 +18,9 @@ public class AccountServiceImpl implements AccountService {
 	
 	@Autowired
 	private AccountRepository accountRepository;
+	
+	@Autowired
+	private AccountFactory accountFactory;
 
 	@Override
 	public List<Account> findAll() {
@@ -24,42 +28,30 @@ public class AccountServiceImpl implements AccountService {
 	}
 
 	@Override
-	public AccountDto create(AccountDto obj) {
-		return valueRate(obj);
-	}		
-
-	private AccountDto valueRate(AccountDto obj) {
-		Double difference = (double) ChronoUnit.DAYS.between(obj.getDateScheduled(), obj.getDateTransfer());
+	public void create(Account obj) {
+		//Double difference = (double) ChronoUnit.DAYS.between(obj.getDateTransfer(),obj.getDateScheduled());
+		Double rate = null;
 		
-		if(obj.getPeriod().equals(TypeAccountEnum.A) || obj.getPeriod().equals(TypeAccountEnum.D)) {
-			if(obj.getVelue() <= 1000.00 ||difference.equals(0)) {
-			    obj.setRate(3 + (obj.getVelue() * 0.03));
-			    
-			}
-		} else if(obj.getPeriod().equals(TypeAccountEnum.B) || obj.getPeriod().equals(TypeAccountEnum.D)) {
-			if((obj.getVelue() > 1000.00 && obj.getVelue() <= 2000.00) 
-					|| (difference > 0 && difference <= 10)) {
-				obj.setRate(12.00);
-				
-			}
-		} else if(obj.getPeriod().equals(TypeAccountEnum.C) || obj.getPeriod().equals(TypeAccountEnum.D)) {
-			 if(obj.getVelue() > 2000.00 || (difference > 10 && difference <= 20)) {
-				obj.setRate(obj.getVelue() * 0.082);
-				
-			} else if(obj.getVelue() > 2000.00 || (difference > 20 && difference <= 30)) {
-				obj.setRate(obj.getVelue() * 0.069);
-				
-			} else if(obj.getVelue() > 2000.00 || (difference > 30 && difference <= 40)) {
-				obj.setRate(obj.getVelue() * 0.047);
-				
-			} else if(obj.getVelue() > 2000.00 || difference > 40) {
-				obj.setRate(obj.getVelue() *  0.017);
-			}
+		if(obj.getPeriod().equals(TypeAccountEnum.A)){
+			rate = accountFactory.rateA(obj);
+			obj.setRate(rate);
+		
+		} else if(obj.getPeriod().equals(TypeAccountEnum.B)) {
+			rate = accountFactory.rateB(obj);
+			obj.setRate(rate);
+			
+		} else if(obj.getPeriod().equals(TypeAccountEnum.C)) {
+			rate = accountFactory.rateC(obj);
+			obj.setRate(rate);
+			
+		} else if(obj.getPeriod().equals(TypeAccountEnum.D)) {
+			rate = accountFactory.rateD(obj);
+			obj.setRate(rate);
+			
 		}
 		
 		accountRepository.save(obj);
-		return obj;
-	}
+	}		
 }
 
 
