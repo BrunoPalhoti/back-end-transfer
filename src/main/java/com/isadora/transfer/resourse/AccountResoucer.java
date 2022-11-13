@@ -25,18 +25,15 @@ import com.isadora.transfer.services.impl.AccountServiceImpl;
 @RequestMapping(value = "/transfer")
 public class AccountResoucer {
 	
-	public static final String ID = "/{id}";
-	
 	@Autowired
 	private AccountService accountService;
 
-////	@GetMapping
-//	public ResponseEntity<List<AccountDto>> findAll(){
-//		return ResponseEntity.ok()
-//				.body(accountService.findAll()
-//						.stream().map(x -> mapper.map(x, AccountDto.class)).collect(Collectors.toList()));
-//	}
-//	
+	@GetMapping
+	public ResponseEntity<List<?>> findAll(){
+		return new ResponseEntity<>(accountService.findAll(), HttpStatus.OK);
+						
+	}
+	
 	@PostMapping
 	public ResponseEntity<AccountDto> create(@RequestBody Account accountDto){
 		accountDto.setDateTransfer(LocalDate.now());
