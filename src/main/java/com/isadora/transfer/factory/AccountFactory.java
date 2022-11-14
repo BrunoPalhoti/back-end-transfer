@@ -4,25 +4,25 @@ import java.time.temporal.ChronoUnit;
 
 import org.springframework.stereotype.Component;
 
-import com.isadora.transfer.model.Account;
+import com.isadora.transfer.model.dto.AccountDto;
 
 @Component
 public class AccountFactory {
 	
 	
-	public Double rateA(Account obj) {
+	public Double rateA(AccountDto obj) {
 		obj.setRate(3 + (obj.getVelue() * 0.03));
 		Double rate = obj.getRate();
 		return rate ;
 	}
 	
-	public Double rateB(Account obj) {
+	public Double rateB(AccountDto obj) {
 		obj.setRate(12.00);
 		Double rate = obj.getRate();
 		return rate ;
 	}
 	
-	public Double rateC(Account obj) {
+	public Double rateC(AccountDto obj) {
 		Double differenceDays = (double) ChronoUnit.DAYS.between(obj.getDateTransfer(),obj.getDateScheduled());
 		Double rate = null;
 		
@@ -49,7 +49,7 @@ public class AccountFactory {
 			return rate;
 	}
 	
-	public Double rateD(Account obj) {
+	public Double rateD(AccountDto obj) {
 		Double rate = null;
 		
 		if(obj.getVelue() <=1000.00) {
