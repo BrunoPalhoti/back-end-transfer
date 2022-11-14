@@ -12,6 +12,9 @@ import com.isadora.transfer.model.dto.AccountDto;
 import com.isadora.transfer.repository.AccountRepository;
 import com.isadora.transfer.services.AccountService;
 
+import lombok.extern.log4j.Log4j2;
+
+@Log4j2
 @Service
 public class AccountServiceImpl implements AccountService {
 	
@@ -26,11 +29,13 @@ public class AccountServiceImpl implements AccountService {
 
 	@Override
 	public List<Account> findAll() {
+		log.info("Iniciando a busaca dos agendamentos no banco");
 		return accountRepository.findAll();
 	}
 
 	@Override
 	public Account create(AccountDto obj) {
+		log.info("Iniciando o agendamento no banco");
 		Double differenceDays = (double) ChronoUnit.DAYS.between(obj.getDateTransfer(),obj.getDateScheduled());
 		Double rate = null;
 		
@@ -51,6 +56,7 @@ public class AccountServiceImpl implements AccountService {
 			obj.setRate(rate);
 			
 		}
+		log.info("Agendamento salvo no banco com sucesso");
 		return accountRepository.save(mapper.map(obj, Account.class));
 	}		
 }
